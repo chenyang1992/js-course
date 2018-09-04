@@ -93,4 +93,80 @@ var tips = [tipCal(124), tipCal(48), tipCal(268)];
 var amounts = [tips[0]+124, tips[1]+48, tips[2]+268];
 console.log(tips);
 console.log(amounts);
+
+var john = {
+    firstName: 'John',
+    lastName: 'Smith',
+    birthYear: 1990,
+    family: ['Jane', 'Mark', 'Bob', 'Emily'],
+    job: 'teacher',
+    isMaeeried: false,
+    calcAge: function() {
+        this.age = 2018-this.birthYear;
+        
+    }
+};
+
+//console.log(john['job']);
+john.calcAge();
+console.log(john);
+
+var jane = new Object();
+
+
+var infoMark = {
+    fullName:'Mark',
+    calcBMI: function() {
+        this.BMI = this.mass / (this.height * this.height);        
+    }    
+}
+
+infoMark.mass = 30;
+infoMark.height = 169;
+infoMark.calcBMI();
+console.log(infoMark.BMI)
+console.log(infoMark);
+
+var infoJohn = {
+    fullName:'John',
+    calcBMI: function() {
+        this.BMI = this.mass / (this.height * this.height);        
+    }    
+}
+
+infoJohn.mass = 59;
+infoJohn.height = 180;
+infoJohn.calcBMI();
+console.log(infoJohn.BMI);
+console.log(infoJohn);
+
+for (var i = 0; i<10; i++){
+    console.log(i);
+}
+
+var j=0;
+while(j<10) {
+    console.log(j);
+    j++;
+}
 */
+
+
+var bills = [124, 48, 268, 180, 42];
+function calcTips(bills){
+    var tips = new Array();
+    var totleAmount = new Array();
+    for(var i=0; i<bills.length; i++){
+        tips.push(rules(bills[i]));
+        totleAmount.push(tips[i]+bills[i]);
+    }
+    console.log(tips);
+    console.log(totleAmount);
+}
+function rules (bill){
+    if(bill <= 50 ) return bill*20/100;
+    if(bill<=200 ) return bill*15/100;
+    else return bill*10/100;    
+}
+
+calcTips(bills);
