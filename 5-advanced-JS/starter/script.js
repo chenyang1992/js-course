@@ -125,3 +125,38 @@ function retirement(retirementAge) {
 
 var retirementUS = retirement(66);
 retirementUS(1990);
+
+
+// Bind, Call and Apply
+
+var john = {
+    name: 'John',
+    age: 26,
+    job: 'teacher',
+    presentation: function(style, timeOfDay) {
+        if (style === 'formal') {
+            console.log('Good ' + timeOfDay + ', I\'m ' + this.name + ' and ' + this.job);
+        } else if (style === 'friendly') {
+            console.log('Hey! Have a nice ' + timeOfDay + ', I\'m ' + this.name + ' and ' + this.job);
+        }
+    }
+}
+
+john.presentation('formal', 'morning');
+
+var emily = {
+    name: 'Emily',
+    age: 35,
+    job: 'designer'
+}
+
+// This is function call
+john.presentation.call(emily, 'friendly', 'afternoon');
+
+
+// This is function apply
+john.presentation.apply(emily, ['friendly', 'afternoon']);
+
+// This is function bind
+var johnFriendly = john.presentation.bind(john, 'friendly');
+johnFriendly('morning');
