@@ -96,3 +96,32 @@ function interviewQuestion(job) {
 
 var teacherQuestion = interviewQuestion('teacher');
 teacherQuestion('john');
+
+
+// Immediately invoked function expression
+
+function game() {
+    var score = Math.random() * 10;
+    console.log("normal function " + score);
+}
+
+game();
+
+(function () {
+    var score = Math.random() * 10;
+    console.log("IIFE " + score);
+})();
+
+
+// Closures
+
+function retirement(retirementAge) {
+    var a = ' years left until retirement.';
+    return function(yearOfBirth) {
+        var age = 2016 - yearOfBirth;
+        console.log(retirementAge - age + a);
+    }
+}
+
+var retirementUS = retirement(66);
+retirementUS(1990);
