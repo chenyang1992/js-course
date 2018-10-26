@@ -160,9 +160,9 @@ var UIController = (function() {
             var type;
             obj.budget > 0 ? type = 'inc' : type = 'exp';
             
-            document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
-            document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
-            document.querySelector(DOMstrings.expensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
+            document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
+            document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
+            document.querySelector(DOMstrings.expensesLabel).textContent = obj.totalExp;
             
             if (obj.percentage > 0) {
                 document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage + '%';
@@ -192,6 +192,8 @@ var controller = (function(budgetCtrl, UICtrl) {
                 ctrlAddItem();        
             }
         });
+        
+        document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
     };
     
     var updateBudget = function() {
@@ -224,6 +226,26 @@ var controller = (function(budgetCtrl, UICtrl) {
             // 5. Calculate and update budget
             updateBudget();
         }
+    };
+    
+    var ctrlDeleteItem = function(event) {
+        
+        var itemID, splitID, type, ID;
+        
+        itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+        
+        if (itemID) {
+            splitID = itemID.split('-');
+            type = splitID[0];
+            ID = splitID[1];
+            
+            // 1. Delete the item from the data structure
+            
+            // 2. Delete the item from the UI
+            
+            // 3. Update and show the new budget
+        }
+    
     };
     
     return {
