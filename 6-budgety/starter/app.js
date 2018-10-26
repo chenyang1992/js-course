@@ -59,6 +59,14 @@ var budgetController = (function() {
             return newItem;            
         },
         
+        deleteItem: function(type, id) {
+            
+            data.allItems[type][id];
+            
+            
+            
+        },
+        
         calculateBudge: function() {
             
             // Calculate total income and expenses
