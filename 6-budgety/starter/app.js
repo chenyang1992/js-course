@@ -4,6 +4,7 @@ var budgetController = (function() {
         this.id = id;
         this.description = description;
         this.value = value;
+        this.percentage = -1;
     };
     
     var Income = function(id, description, value) {
@@ -23,7 +24,7 @@ var budgetController = (function() {
     
     var data = {
         allItems: {
-            exp: [],
+            exp:[],
             inc:[]
         },
         totals: {
@@ -60,11 +61,16 @@ var budgetController = (function() {
         },
         
         deleteItem: function(type, id) {
+            var ids, index;
+            ids = data.allItems[type].map(function(current) {
+                return current.id;                
+            });
             
-            data.allItems[type][id];
+            index = ids.indexOf(id);
             
-            
-            
+            if (index !== -1) {
+                data.allItems[type].splice(index, 1);
+            }
         },
         
         calculateBudge: function() {
@@ -91,7 +97,13 @@ var budgetController = (function() {
                 totalExp: data.totals.exp,
                 percentage: data.percentage
             }
+        },
+        
+        testing: function() {
+            console.log(data);
         }
+
+        
     };
     
 })();
@@ -148,6 +160,12 @@ var UIController = (function() {
             // Insert the HTML into the DOM
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);  
             
+        },
+        
+        deleteListItem: function(selectorID) {
+            
+            var el = document.getElementById(selectorID);
+            el.parentNode.removeChild(el);
         },
         
         clearFields: function() {
@@ -245,13 +263,16 @@ var controller = (function(budgetCtrl, UICtrl) {
         if (itemID) {
             splitID = itemID.split('-');
             type = splitID[0];
-            ID = splitID[1];
+            ID = parseInt(splitID[1]);
             
             // 1. Delete the item from the data structure
+            budgetCtrl.deleteItem(type, ID);
             
             // 2. Delete the item from the UI
+            UICtrl.deleteListItem(itemID);
             
             // 3. Update and show the new budget
+            updateBudget();
         }
     
     };
